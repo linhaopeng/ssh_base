@@ -24,7 +24,7 @@ public class UserAction {
 
 	public void save() {
 		User t = new User();
-		t.setId(UUID.randomUUID().toString());
+		t.setId(1);
 		t.setName("孙宇2");
 		t.setPwd("123465");
 		t.setCreatedatetime(new Date());
@@ -32,7 +32,7 @@ public class UserAction {
 	}
 
 	public void get() {
-		User user = userService.getById("3371c1f6-b33f-4e49-8df2-851e403439a1");
+		User user = userService.get(1);
 		System.out.println(user);
 	}
 }

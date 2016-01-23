@@ -4,11 +4,15 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * User entity. @author MyEclipse Persistence Tools
@@ -19,7 +23,7 @@ public class User implements java.io.Serializable {
 
 	// Fields
 
-	private String id;
+	private int id;
 	private String name;
 	private String pwd;
 	private Date createdatetime;
@@ -32,14 +36,14 @@ public class User implements java.io.Serializable {
 	}
 
 	/** minimal constructor */
-	public User(String id, String name, String pwd) {
+	public User(int id, String name, String pwd) {
 		this.id = id;
 		this.name = name;
 		this.pwd = pwd;
 	}
 
 	/** full constructor */
-	public User(String id, String name, String pwd, Date createdatetime, Date modifydatetime) {
+	public User(int id, String name, String pwd, Date createdatetime, Date modifydatetime) {
 		this.id = id;
 		this.name = name;
 		this.pwd = pwd;
@@ -49,12 +53,15 @@ public class User implements java.io.Serializable {
 
 	// Property accessors
 	@Id
-	@Column(name = "ID", unique = true, nullable = false, length = 36)
-	public String getId() {
+	@Column(name = "ID", unique = true, nullable = false)
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GenericGenerator(name = "paymentableGenerator", strategy = "native")
+
+	public int getId() {
 		return this.id;
 	}
 
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

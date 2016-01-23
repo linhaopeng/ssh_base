@@ -63,6 +63,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
+				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 			</props>
 		</property>
 
@@ -104,17 +105,11 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
 			<tx:method name="repair" />
 			<tx:method name="deleteAndRepair" />
 
-			<tx:method name="get*" propagation="SUPPORTS" />
-			<tx:method name="find*" propagation="SUPPORTS" />
-			<tx:method name="load*" propagation="SUPPORTS" />
-			<tx:method name="search*" propagation="SUPPORTS" />
-			<tx:method name="datagrid*" propagation="SUPPORTS" />
-
-			<tx:method name="*" propagation="SUPPORTS" />
+			<tx:method name="*" propagation="REQUIRED" read-only="true" />
 		</tx:attributes>
 	</tx:advice>
 	<aop:config>
-		<aop:pointcut id="transactionPointcut" expression="execution(* hp.service..*Impl.*(..))" />
+		<aop:pointcut id="transactionPointcut" expression="execution(* hp.dao..*Impl.*(..))" />
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice" />
 	</aop:config>
 

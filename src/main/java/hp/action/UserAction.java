@@ -30,4 +30,9 @@ public class UserAction {
 		t.setCreatedatetime(new Date());
 		userService.save(t);
 	}
+
+	public void get() {
+		User user = userService.getById("3371c1f6-b33f-4e49-8df2-851e403439a1");
+		System.out.println(user);
+	}
 }

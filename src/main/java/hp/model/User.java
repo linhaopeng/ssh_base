@@ -1,6 +1,7 @@
 package hp.model;
 
 import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -13,7 +14,7 @@ import javax.persistence.UniqueConstraint;
  * User entity. @author MyEclipse Persistence Tools
  */
 @Entity
-@Table(name = "TUSER", schema = "SSH", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
+@Table(name = "t_user", schema = "SSH", uniqueConstraints = @UniqueConstraint(columnNames = "NAME"))
 public class User implements java.io.Serializable {
 
 	// Fields
@@ -95,4 +96,12 @@ public class User implements java.io.Serializable {
 		this.modifydatetime = modifydatetime;
 	}
 
+	@Override
+	public String toString() {
+		return "User [id=" + id + ", name=" + name + ", pwd=" + pwd
+				+ ", createdatetime=" + createdatetime + ", modifydatetime="
+				+ modifydatetime + "]";
+	}
+	
+	
 }

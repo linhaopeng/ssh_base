@@ -1,5 +1,6 @@
 package hp.action;
 
+import hp.action.base.BaseAction;
 import hp.model.User;
 import hp.service.UserService;
 
@@ -12,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Namespace("/user")
 @Action(value = "userAction")
-public class UserAction {
+public class UserAction extends BaseAction<User>{
 
 	@Autowired
 	private UserService userService;
@@ -32,7 +33,7 @@ public class UserAction {
 	}
 
 	public void get() {
-		User user = userService.get(1);
+		User user = userService.get(model.getId());
 		System.out.println(user);
 	}
 }

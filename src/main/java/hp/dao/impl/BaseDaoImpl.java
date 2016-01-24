@@ -15,9 +15,12 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.transform.Transformers;
+import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 // @Transactional注解可以被继承，即对子类也有效
 @SuppressWarnings("unchecked")
+@Repository
 public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 
 	private Class<?> clazz = null; // clazz中存储了子类当前操作实体类型

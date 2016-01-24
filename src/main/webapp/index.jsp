@@ -15,12 +15,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-  </head>
+	<%@include file="common/common.jsp" %>
+ </head>
   
   <body>
-    This is my JSP page. <br>
+  <script type="text/javascript">
+  $(function(){
+	  $('#dd').dialog({
+		    title: 'My Dialog',
+		    width: 400,
+		    height: 200,
+		    closed: false,
+		    cache: false,
+		    href: 'get_content.php',
+		    modal: true
+		});
+  })
+  </script>
+   <div id="dd">Dialog Content.</div>
   </body>
 </html>

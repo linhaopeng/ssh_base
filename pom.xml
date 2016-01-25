@@ -12,7 +12,7 @@
 			<id>oschinaRepository</id>
 			<name>local private nexus</name>
 			<url>http://maven.oschina.net/content/groups/public/</url>
-			<releases>
+			<releases> 
 				<enabled>true</enabled>
 			</releases>
 			<snapshots>

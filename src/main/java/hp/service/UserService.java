@@ -1,9 +1,9 @@
 package hp.service;
 
 import hp.dao.BaseDao;
-import hp.model.User;
+import hp.model.SysUser;
 
-public interface UserService extends BaseDao<User>{
+public interface UserService extends BaseDao<SysUser>{
 	public void test();
-	public User login(User user);
+	public SysUser login(SysUser user);
 }

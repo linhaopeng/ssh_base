@@ -1,11 +1,11 @@
 package hp.action;
 
-import hp.action.base.BaseAction;
-import hp.model.User;
-import hp.service.UserService;
-
 import java.util.Date;
 import java.util.UUID;
+
+import hp.action.base.BaseAction;
+import hp.model.SysUser;
+import hp.service.UserService;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Namespace("/user")
 @Action(value = "userAction")
-public class UserAction extends BaseAction<User>{
+public class UserAction extends BaseAction<SysUser>{
 
 	@Autowired
 	private UserService userService;
@@ -24,16 +24,16 @@ public class UserAction extends BaseAction<User>{
 	}
 
 	public void save() {
-		User t = new User();
-		t.setId(1);
+		SysUser t = new SysUser();
 		t.setName("孙宇2");
+		t.setLoginname("浩鹏");
 		t.setPwd("123465");
 		t.setCreatedatetime(new Date());
 		userService.save(t);
 	}
 
 	public void get() {
-		User user = userService.get(model.getId());
+		SysUser user = userService.get(model.getId());
 		System.out.println(user);
 	}
 }

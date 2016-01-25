@@ -1,0 +1,49 @@
+[{
+    "id":1,
+    "text":"Folder1",
+    "iconCls":"icon-save",
+    "children":[{
+        "text":"File1",
+        "checked":true,
+        "iconCls":"icon-save",
+        "attributes":{
+        	"url":"index.jsp"
+        }
+    },{
+        "text":"Books",
+        "state":"open",
+        "iconCls":"icon-save",
+        "attributes":{
+            "url":"/demo/book/abc",
+            "price":100
+        },
+        "children":[{
+            "text":"照片",
+            "checked":true,
+            "attributes":{
+	        	"url":"index.jsp"
+	        }
+        },{
+            "id": 8,
+            "text":"Sub Bookds",
+            "state":"open",
+            "attributes":{
+	        	"url":"index.jsp"
+	        }
+        }]
+    }]
+},{
+    "text":"Languages",
+    "state":"closed",
+    "children":[{
+        "text":"Java",
+        "attributes":{
+        	"url":"index.jsp"
+        }
+    },{
+        "text":"C#",
+        "attributes":{
+        	"url":"index.jsp"
+        }
+    }]
+}]

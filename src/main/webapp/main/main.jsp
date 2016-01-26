@@ -11,15 +11,15 @@
 	$(function() {
 
 		mainMenu = $('#mainMenu').tree({
-			url : '${pageContext.request.contextPath}/tree_data.json',
+			url : '${pageContext.request.contextPath}/resource/sysResourceAction!getTree.action',
 			parentField : 'pid',
 			onClick : function(node) {
 				if (node.attributes.url) {
 					var src = '${pageContext.request.contextPath}' + node.attributes.url;
 					var startIndex = node.attributes.url.indexOf("/");
-					if (startIndex==0) {
+					/* if (startIndex==0) {
 						src = node.attributes.url;
-					}
+					} */
 					if (node.attributes.target && node.attributes.target.length > 0) {
 						window.open(src, node.attributes.target);
 					} else {
@@ -28,7 +28,7 @@
 							title : node.text,
 							closable : true,
 							iconCls : node.iconCls,
-							content : '<iframe src="{'+src+'}" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>',
+							content : '<iframe src="'+src+'" allowTransparency="true" style="border:0;width:100%;height:99%;" frameBorder="0"></iframe>',
 							border : false,
 							fit : true
 						};

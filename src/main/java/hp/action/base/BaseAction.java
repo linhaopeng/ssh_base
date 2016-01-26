@@ -1,5 +1,6 @@
 package hp.action.base;
 
+import hp.service.SysResourceService;
 import hp.service.UserService;
 import hp.util.FastjsonFilter;
 
@@ -51,6 +52,8 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 	
 	@Resource
 	protected UserService userService;
+	@Resource
+	protected SysResourceService sysResourceService;
 	
 	/**
 	 * 将对象转换成JSON字符串，并响应回前台

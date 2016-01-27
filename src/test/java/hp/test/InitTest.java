@@ -64,7 +64,7 @@ public class InitTest {
 		jsgl.setResourcetype(sysResourcetype);
 		
 		SysResource yhgl = new SysResource();
-		yhgl.setUrl("/base/syresource!treeGrid");
+		yhgl.setUrl("/user/userAction!list.action");
 		yhgl.setDescription("用户管理描述");
 		yhgl.setName("用户管理");
 		yhgl.setCreatedatetime(new Date());

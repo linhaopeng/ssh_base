@@ -31,6 +31,10 @@ public class UserAction extends BaseAction<SysUser>{
 		t.setCreatedatetime(new Date());
 		userService.save(t);
 	}
+	
+	public void list() {
+		writeJson("adf");
+	}
 
 	public void get() {
 		SysUser user = userService.get(model.getId());

@@ -34,6 +34,11 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 	private static final Logger logger = Logger.getLogger(BaseAction.class);
 	
 	protected T model;
+	
+	protected int page = 1;// 当前页
+	protected int rows = 10;// 每页显示记录数
+	protected String sort;// 排序字段
+	protected String order = "asc";// asc/desc
 
 	/**
 	 * 初始化model
@@ -151,6 +156,40 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 	 */
 	public HttpSession getSession() {
 		return ServletActionContext.getRequest().getSession();
+	}
+	
+	//  getter setter-----------------------------------------
+
+	public int getPage() {
+		return page;
+	}
+
+	public void setPage(int page) {
+		this.page = page;
+	}
+
+	public int getRows() {
+		return rows;
+	}
+
+	public void setRows(int rows) {
+		this.rows = rows;
+	}
+
+	public String getSort() {
+		return sort;
+	}
+
+	public void setSort(String sort) {
+		this.sort = sort;
+	}
+
+	public String getOrder() {
+		return order;
+	}
+
+	public void setOrder(String order) {
+		this.order = order;
 	}
 
 

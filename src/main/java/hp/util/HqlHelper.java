@@ -1,6 +1,9 @@
 package hp.util;
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
 
 /**
  * 用于辅助拼接生成HQL的工具类
@@ -9,12 +12,14 @@ import java.util.List;
  * 
  */
 public class HqlHelper {
+	private static final Logger logger = Logger.getLogger(HqlHelper.class);
 
 	private String fromClause; // From子句，必须
 	private String whereClause = ""; // Where子句，可选
 	private String orderByClause = ""; // OrderBy子句，可选
 
-	private List<Object> parameters = new ArrayList<Object>(); // 参数列表
+	// private List<Object> parameters = new ArrayList<Object>(); // 参数列表
+	private Map<String, Object> map = new HashMap<String, Object>();// 参数列表
 
 	/**
 	 * 生成From子句，默认的别名为'o'
@@ -40,21 +45,23 @@ public class HqlHelper {
 	 * 拼接Where子句
 	 * 
 	 * @param condition
-	 * @param params
+	 *            条件跟连接符 比如： name=
+	 * @param paramsName
+	 *            参数的名称 比如 :name
+	 * @param paramsValue
+	 *            参数的值
+	 * @return
 	 */
-	public HqlHelper addCondition(String condition, Object... params) {
+	public HqlHelper addCondition(String condition, String paramsName, String paramsValue) {
 		// 拼接
 		if (whereClause.length() == 0) {
-			whereClause = " WHERE " + condition;
+			whereClause = " WHERE " + condition + " :" + paramsName;
 		} else {
-			whereClause += " AND " + condition;
+			whereClause += " AND " + condition + " :" + paramsName;
 		}
 
-		// 保存参数
-		if (params != null && params.length > 0) {
-			for (Object obj : params) {
-				parameters.add(obj);
-			}
+		if (null != paramsValue) {
+			map.put(paramsName, paramsValue);
 		}
 
 		return this;
@@ -64,12 +71,17 @@ public class HqlHelper {
 	 * 如果第1个参数为true，则拼接Where子句
 	 * 
 	 * @param append
+	 *            是否需要添加条件
 	 * @param condition
-	 * @param params
+	 *            条件跟连接符 比如： name=
+	 * @param paramsName
+	 *            参数的名称 比如 :name
+	 * @param paramsValue
+	 *            参数的值
 	 */
-	public HqlHelper addCondition(boolean append, String condition, Object... params) {
+	public HqlHelper addCondition(boolean append, String condition, String paramsName, String paramsValue) {
 		if (append) {
-			addCondition(condition, params);
+			addCondition(condition, paramsName, paramsValue);
 		}
 		return this;
 	}
@@ -79,14 +91,14 @@ public class HqlHelper {
 	 * 
 	 * @param propertyName
 	 *            属性名
-	 * @param isAsc
-	 *            true表示升序，false表示降序
+	 * @param order
+	 *            "ASC"表示升序，"DESC"表示降序
 	 */
-	public HqlHelper addOrder(String propertyName, boolean isAsc) {
+	public HqlHelper addOrder(String propertyName, String order) {
 		if (orderByClause.length() == 0) {
-			orderByClause = " ORDER BY " + propertyName + (isAsc ? " ASC" : " DESC");
+			orderByClause = " ORDER BY " + propertyName + " " + order;
 		} else {
-			orderByClause += ", " + propertyName + (isAsc ? " ASC" : " DESC");
+			orderByClause += ", " + propertyName + " " + order;
 		}
 		return this;
 	}
@@ -97,12 +109,12 @@ public class HqlHelper {
 	 * @param append
 	 * @param propertyName
 	 *            属性名
-	 * @param isAsc
-	 *            true表示升序，false表示降序
+	 * @param order
+	 *            "ASC"表示升序，"DESC"表示降序
 	 */
-	public HqlHelper addOrder(boolean append, String propertyName, boolean isAsc) {
+	public HqlHelper addOrder(boolean append, String propertyName, String order) {
 		if (append) {
-			addOrder(propertyName, isAsc);
+			addOrder(propertyName, order);
 		}
 		return this;
 	}
@@ -113,6 +125,7 @@ public class HqlHelper {
 	 * @return
 	 */
 	public String getQueryListHql() {
+		logger.info(fromClause + whereClause + orderByClause);
 		return fromClause + whereClause + orderByClause;
 	}
 
@@ -122,6 +135,7 @@ public class HqlHelper {
 	 * @return
 	 */
 	public String getQueryCountHql() {
+		logger.info("SELECT COUNT(*) " + fromClause + whereClause);
 		return "SELECT COUNT(*) " + fromClause + whereClause;
 	}
 
@@ -130,8 +144,16 @@ public class HqlHelper {
 	 * 
 	 * @return
 	 */
-	public List<Object> getParameters() {
-		return parameters;
+	// public List<Object> getParameters() {
+	// return parameters;
+	// }
+	/**
+	 * 获取参数列表
+	 * 
+	 * @return
+	 */
+	public Map<String, Object> getMap() {
+		return map;
 	}
 
 }

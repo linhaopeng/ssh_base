@@ -65,7 +65,7 @@ public class SysUser implements java.io.Serializable {
 	public void setCreatedatetime(Date createdatetime) {
 		this.createdatetime = createdatetime;
 	}
-
+	
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "UPDATEDATETIME", length = 7)
 	public Date getUpdatedatetime() {

@@ -9,7 +9,7 @@
 	var addFun = function() {
 		var dialog = parent.sy.modalDialog({
 			title : '添加用户信息',
-			url : sy.contextPath + '/securityJsp/base/SyuserForm.jsp',
+			url :  '${cxt}/main/user/editUI.jsp',
 			buttons : [ {
 				text : '添加',
 				handler : function() {
@@ -75,15 +75,16 @@
 		grid = $('#grid').datagrid({
 			title : '',
 			url :  '${cxt}/user/userAction!list.action',
-			striped : true,
-			rownumbers : true,
-			pagination : true,
-			singleSelect : true,
+			striped : true,//是否显示斑马线效果。
+			rownumbers : true, //左边显示序号
+			pagination : true, //是否分页
+			singleSelect : true, //是否单选	
 			idField : 'id',
-			sortName : 'createdatetime',
-			sortOrder : 'desc',
-			pageSize : 50,
+			sortName : 'createdatetime', //排序的字段，会传递一个参数到后台， sort=createdatetime
+			sortOrder : 'desc',   //排序是升序还是降序，会传递一个参数到后台，order=desc
+			pageSize : 20,
 			pageList : [ 10, 20, 30, 40, 50, 100, 200, 300, 400, 500 ],
+			//冻结列，左边固定不动
 			frozenColumns : [ [ {
 				width : '100',
 				title : '登录名',
@@ -95,6 +96,7 @@
 				field : 'name',
 				sortable : true
 			} ] ],
+			//普通列
 			columns : [ [ {
 				width : '150',
 				title : '创建时间',
@@ -129,29 +131,41 @@
 				field : 'photo',
 				formatter : function(value, row) {
 					if(value){
-						return sy.formatString('<span title="{0}">{1}</span>', value, value);
+						return value;
+						//return sy.formatString('<span title="{0}">{1}</span>', value, value);
 					}
 				}
 			}, {
 				title : '操作',
 				field : 'action',
-				width : '90',
+				width : '90'/* ,
 				formatter : function(value, row) {
 					return str;
-				}
+				} */
 			} ] ],
 			toolbar : '#toolbar',
 			onBeforeLoad : function(param) {
+				//加载之前，启动loading
 				parent.$.messager.progress({
 					text : '数据加载中....'
 				});
 			},
 			onLoadSuccess : function(data) {
-				$('.iconImg').attr('src', sy.pixel_0);
+				//$('.iconImg').attr('src', sy.pixel_0);
+				//加载之后，启动loading
 				parent.$.messager.progress('close');
 			}
 		});
 	});
+	
+function query(){
+	//将表单中不为空的转成json对象
+	var data = sy.serializeObject($('#searchForm'));
+	/* console.log(data);
+	var x = $('#searchForm').serialize();
+	console.log(x); */
+	grid.datagrid('load',data);
+}
 </script>
 </head>
 <body class="easyui-layout" data-options="fit:true,border:false">
@@ -163,16 +177,19 @@
 						<table>
 							<tr>
 								<td>登录名</td>
-								<td><input name="QUERY_t#loginname_S_LK" style="width: 80px;" /></td>
+								<td><input name="loginname" style="width: 80px;" /></td>
 								<td>姓名</td>
-								<td><input name="QUERY_t#name_S_LK" style="width: 80px;" /></td>
+								<td><input name="name" style="width: 80px;" /></td>
 								<td>性别</td>
-								<td><select name="QUERY_t#sex_S_EQ" class="easyui-combobox" data-options="panelHeight:'auto',editable:false"><option value="">请选择</option>
+								<td>
+									<select name="sex" class="easyui-combobox" data-options="panelHeight:'auto',editable:false"><option value="">请选择</option>
 										<option value="1">男</option>
-										<option value="0">女</option></select></td>
+										<option value="0">女</option>
+									</select>
+								</td>
 								<td>创建时间</td>
-								<td><input name="QUERY_t#createdatetime_D_GE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="QUERY_t#createdatetime_D_LE" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
-								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="grid.datagrid('load',sy.serializeObject($('#searchForm')));">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
+								<td><input name="startcreatedatetime" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" />-<input name="endcreatedatetime" class="Wdate" onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})" readonly="readonly" style="width: 120px;" /></td>
+								<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom',plain:true" onclick="query()">过滤</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-zoom_out',plain:true" onclick="$('#searchForm input').val('');grid.datagrid('load',{});">重置过滤</a></td>
 							</tr>
 						</table>
 					</form>

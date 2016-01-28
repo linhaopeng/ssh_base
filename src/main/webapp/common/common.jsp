@@ -11,4 +11,10 @@
 <link rel="stylesheet" type="text/css" href="${cxt}/jslib/jquery-easyui-1.3.5/themes/icon.css">
 <script type="text/javascript" src="${cxt}/jslib/jquery-easyui-1.3.5/jquery.easyui.min.js"></script>
 <script type="text/javascript" src="${cxt}/jslib/jquery-easyui-1.3.5/locale/easyui-lang-zh_CN.js"></script>
+
+<!-- upload -->
+<script type="text/javascript" src="${cxt}/jslib/plupload-2.0.0/js/plupload.full.min.js"></script>
+<script type="text/javascript" src="${cxt}/jslib/plupload-2.0.0/js/i18n/zh_CN.js"></script>
+
 <script type="text/javascript" src="${cxt}/jslib/extendEasyUI.js"></script>
+<script type="text/javascript" src="${cxt}/jslib/extendJquery.js"></script>

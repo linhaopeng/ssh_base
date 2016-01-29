@@ -28,12 +28,17 @@ public class UserAction extends BaseAction<SysUser>{
 	}
 
 	public void save() {
-		SysUser t = new SysUser();
-		t.setName("孙宇2");
-		t.setLoginname("浩鹏");
-		t.setPwd("123465");
-		t.setCreatedatetime(new Date());
-		userService.save(t);
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			//TODO 判断登录名是否存在
+			userService.save(model);
+			map.put("msg", "添加成功");
+			map.put("success", true);
+		} catch (Exception e) {
+			map.put("msg", "添加失败");
+			map.put("success", false);
+		}
+		writeJson(map);
 	}
 	
 	public void list() {
@@ -49,9 +54,9 @@ public class UserAction extends BaseAction<SysUser>{
 		writeJson(grid);
 	}
 
-	public void get() {
+	public void getById() {
 		SysUser user = userService.get(model.getId());
-		System.out.println(user);
+		writeJson(user);
 	}
 
 }

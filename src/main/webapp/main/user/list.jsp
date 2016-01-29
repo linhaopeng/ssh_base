@@ -21,13 +21,13 @@
 	var showFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '查看用户信息',
-			url : sy.contextPath + '/securityJsp/base/SyuserForm.jsp?id=' + id
+			url : '${cxt}/main/user/editUI.jsp?id=' + id
 		});
 	};
 	var editFun = function(id) {
 		var dialog = parent.sy.modalDialog({
 			title : '编辑用户信息',
-			url : sy.contextPath + '/securityJsp/base/SyuserForm.jsp?id=' + id,
+			url : '${cxt}/main/user/editUI.jsp?id=' + id,
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
@@ -138,10 +138,12 @@
 			}, {
 				title : '操作',
 				field : 'action',
-				width : '90'/* ,
+				width : '90',
 				formatter : function(value, row) {
+					var str = '';
+					str += '<span style="color:blue;" onclick="editFun('+row.id+')">修改</span>'; 
 					return str;
-				} */
+				} 
 			} ] ],
 			toolbar : '#toolbar',
 			onBeforeLoad : function(param) {

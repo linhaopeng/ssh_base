@@ -101,3 +101,34 @@ $.extend($.fn.treegrid.defaults, {
 		return data;
 	}
 });
+/**
+ * 滚动条
+ * 
+ * @author 孙宇
+ * @requires jQuery,EasyUI
+ */
+sy.progressBar = function(options) {
+	if (typeof options == 'string') {
+		if (options == 'close') {
+			$('#syProgressBarDiv').dialog('destroy');
+		}
+	} else {
+		if ($('#syProgressBarDiv').length < 1) {
+			var opts = $.extend({
+				title : '&nbsp;',
+				closable : false,
+				width : 300,
+				height : 60,
+				modal : true,
+				content : '<div id="syProgressBar" class="easyui-progressbar" data-options="value:0"></div>'
+			}, options);
+			$('<div id="syProgressBarDiv"/>').dialog(opts);
+			$.parser.parse('#syProgressBarDiv');
+		} else {
+			$('#syProgressBarDiv').dialog('open');
+		}
+		if (options.value) {
+			$('#syProgressBar').progressbar('setValue', options.value);
+		}
+	}
+};

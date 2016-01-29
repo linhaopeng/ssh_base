@@ -17,10 +17,10 @@
 		if ($(':input[name="id"]').val().length > 0) {
 			url = '${cxt}/base/syuser!update.sy';
 		} else {
-			url = '${cxt}/base/syuser!save.sy';
+			url = '${cxt}/user/userAction!save.action';
 		}
 		$.post(url, sy.serializeObject($('form')), function(result) {
-			parent.sy.progressBar('close');//关闭上传进度条
+			//parent.sy.progressBar('close');//关闭上传进度条
 
 			if (result.success) {
 				$pjq.messager.alert('提示', result.msg, 'info');
@@ -51,7 +51,7 @@
 			parent.$.messager.progress({
 				text : '数据加载中....'
 			});
-			$.post(sy.contextPath + '/base/syuser!getById.sy', {
+			$.post('${cxt}/user/userAction!getById.action', {
 				id : $(':input[name="id"]').val()
 			}, function(result) {
 				if (result.id != undefined) {
@@ -64,7 +64,7 @@
 						'photo' : result.photo
 					});
 					if (result.photo) {
-						$('#photo').attr('src', sy.contextPath + result.photo);
+						$('#photo').attr('src', '${cxt}' + result.photo);
 					}
 				}
 				parent.$.messager.progress('close');
@@ -110,7 +110,7 @@
 			});
 			up.refresh();
 		});
-		uploader.bind('UploadProgress', function(up, file) {//上传进度改变
+		/* uploader.bind('UploadProgress', function(up, file) {//上传进度改变
 			var msg;
 			if (file.percent == 100) {
 				msg = '99';//因为某些大文件上传到服务器需要合并的过程，所以强制客户看到99%，等后台合并完成...
@@ -123,7 +123,7 @@
 				title : '文件上传中...',
 				value : msg
 			});
-		});
+		}); */
 		uploader.bind('Error', function(up, err) {//出现错误
 			$('#filelist').append("<div>错误代码: " + err.code + ", 描述信息: " + err.message + (err.file ? ", 文件名称: " + err.file.name : "") + "</div>");
 			up.refresh();

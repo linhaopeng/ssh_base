@@ -36,7 +36,7 @@ public class SysUser implements java.io.Serializable {
 	private Date createdatetime;
 	private Date updatedatetime;
 	private String loginname; // 不允许为null
-	private String pwd;
+	private String pwd = "123456"; //默认为123456
 	private String name;
 	private String sex;
 	private Integer age;

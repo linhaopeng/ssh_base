@@ -46,22 +46,22 @@ public class HqlHelper {
 	 * 
 	 * @param condition
 	 *            条件跟连接符 比如： name=
-	 * @param paramsName
-	 *            参数的名称 比如 :name
-	 * @param paramsValue
-	 *            参数的值
+	 * @param fieldName
+	 *            字段的名称 比如 :name
+	 * @param fieldValue
+	 *            字段的值
 	 * @return
 	 */
-	public HqlHelper addCondition(String condition, String paramsName, String paramsValue) {
+	public HqlHelper addCondition(String condition, String fieldName, String fieldValue) {
 		// 拼接
 		if (whereClause.length() == 0) {
-			whereClause = " WHERE " + condition + " :" + paramsName;
+			whereClause = " WHERE " + condition + " :" + fieldName;
 		} else {
-			whereClause += " AND " + condition + " :" + paramsName;
+			whereClause += " AND " + condition + " :" + fieldName;
 		}
 
-		if (null != paramsValue) {
-			map.put(paramsName, paramsValue);
+		if (null != fieldValue) {
+			map.put(fieldName, fieldValue);
 		}
 
 		return this;
@@ -74,14 +74,14 @@ public class HqlHelper {
 	 *            是否需要添加条件
 	 * @param condition
 	 *            条件跟连接符 比如： name=
-	 * @param paramsName
-	 *            参数的名称 比如 :name
-	 * @param paramsValue
-	 *            参数的值
+	 * @param fieldName
+	 *            字段的名称 比如 :name
+	 * @param fieldValue
+	 *            字段的值
 	 */
-	public HqlHelper addCondition(boolean append, String condition, String paramsName, String paramsValue) {
+	public HqlHelper addCondition(boolean append, String condition, String fieldName, String fieldValue) {
 		if (append) {
-			addCondition(condition, paramsName, paramsValue);
+			addCondition(condition, fieldName, fieldValue);
 		}
 		return this;
 	}

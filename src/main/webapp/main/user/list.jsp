@@ -39,7 +39,7 @@
 	var removeFun = function(id) {
 		parent.$.messager.confirm('询问', '您确定要删除此记录？', function(r) {
 			if (r) {
-				$.post(sy.contextPath + '/base/syuser!delete.sy', {
+				$.post('${cxt}/user/userAction!delete.action', {
 					id : id
 				}, function() {
 					grid.datagrid('reload');
@@ -51,18 +51,6 @@
 		var dialog = parent.sy.modalDialog({
 			title : '修改角色',
 			url : sy.contextPath + '/securityJsp/base/SyuserRoleGrant.jsp?id=' + id,
-			buttons : [ {
-				text : '修改',
-				handler : function() {
-					dialog.find('iframe').get(0).contentWindow.submitForm(dialog, grid, parent.$);
-				}
-			} ]
-		});
-	};
-	var grantOrganizationFun = function(id) {
-		var dialog = parent.sy.modalDialog({
-			title : '修改机构',
-			url : sy.contextPath + '/securityJsp/base/SyuserOrganizationGrant.jsp?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -142,6 +130,7 @@
 				formatter : function(value, row) {
 					var str = '';
 					str += '<span style="color:blue;" onclick="editFun('+row.id+')">修改</span>'; 
+					str += '<span style="color:blue;" onclick="removeFun('+row.id+')">删除</span>'; 
 					return str;
 				} 
 			} ] ],
@@ -203,8 +192,8 @@ function query(){
 						<tr>
 							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-note_add',plain:true" onclick="addFun();">添加</a></td>
 							<td><div class="datagrid-btn-separator"></div></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="">导入</a></td>
-							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="">导出</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_add',plain:true" onclick="javascript:alert('未实现')">导入</a></td>
+							<td><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'ext-icon-table_go',plain:true" onclick="javascript:alert('未实现')">导出</a></td>
 						</tr>
 					</table>
 				</td>

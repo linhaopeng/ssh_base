@@ -1,21 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-	String id = request.getParameter("id");
-	if (id == null) {
-		id = "";
-	}
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <title></title>
 <jsp:include page="../../common/common.jsp"></jsp:include>
 <script type="text/javascript">
+	var id = "${param.id}";
 	var uploader;//上传对象
 	var submitNow = function($dialog, $grid, $pjq) {
 		var url;
 		if ($(':input[name="id"]').val().length > 0) {
-			url = '${cxt}/base/syuser!update.sy';
+			url = '${cxt}/user/userAction!update.action';
 		} else {
 			url = '${cxt}/user/userAction!save.action';
 		}
@@ -64,7 +59,7 @@
 						'photo' : result.photo
 					});
 					if (result.photo) {
-						$('#photo').attr('src', '${cxt}' + result.photo);
+						$('#photo').attr('src', result.photo);
 					}
 				}
 				parent.$.messager.progress('close');
@@ -151,7 +146,7 @@
 			<table class="table" style="width: 100%;">
 				<tr>
 					<th>编号</th>
-					<td><input name="id" value="<%=id%>" readonly="readonly" /></td>
+					<td><input name="id" value="${param.id}" readonly="readonly" /></td>
 					<th>登陆名称</th>
 					<td><input name="loginname" class="easyui-validatebox" data-options="required:true" /></td>
 				</tr>

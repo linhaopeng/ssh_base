@@ -1,5 +1,6 @@
 package hp.action.base;
 
+import hp.service.RoleService;
 import hp.service.SysResourceService;
 import hp.service.UserService;
 import hp.util.FastjsonFilter;
@@ -39,6 +40,8 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 	protected int rows = 10;// 每页显示记录数
 	protected String sort;// 排序字段
 	protected String order = "asc";// asc/desc
+	
+	protected String ids;
 
 	/**
 	 * 初始化model
@@ -57,6 +60,8 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 	
 	@Resource
 	protected UserService userService;
+	@Resource
+	protected RoleService roleService;
 	@Resource
 	protected SysResourceService sysResourceService;
 	
@@ -190,6 +195,14 @@ public class BaseAction<T> extends ActionSupport implements  ModelDriven<T> {
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public String getIds() {
+		return ids;
+	}
+
+	public void setIds(String ids) {
+		this.ids = ids;
 	}
 
 

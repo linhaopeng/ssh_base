@@ -10,11 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @Namespace("/user")
 @Action(value = "testAction")
-public class TestAction extends BaseAction<SysUser>{
+public class TestAction extends BaseAction<SysUser> {
 	@Autowired
 	private UserService userService;
-	
-	public void login(){
+
+	public void login() {
 		SysUser user = userService.login(model);
 		writeJson(user);
 	}

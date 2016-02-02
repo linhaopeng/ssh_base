@@ -125,7 +125,7 @@ public class HqlHelper {
 	 * @return
 	 */
 	public String getQueryListHql() {
-		logger.info(fromClause + whereClause + orderByClause);
+		logger.info("-------->" + fromClause + whereClause + orderByClause);
 		return fromClause + whereClause + orderByClause;
 	}
 

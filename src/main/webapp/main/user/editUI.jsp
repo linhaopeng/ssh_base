@@ -71,9 +71,11 @@
 			container : 'container',//文件上传容器
 			runtimes : 'html5,flash',//设置运行环境，会按设置的顺序，可以选择的值有html5,gears,flash,silverlight,browserplus,html4
 			flash_swf_url : '${cxt}/jslib/plupload_1_5_7/plupload/js/plupload.flash.swf',// Flash环境路径设置
-			url : '${cxt}/plupload?fileFolder=/userPhoto',//上传文件路径
+			//url : '${cxt}/plupload?fileFolder=/userPhoto',//上传文件路径
+			url : '${cxt}/upload/uploadAction!upload.action?fileFolder=/userPhoto',//上传文件路径
 			max_file_size : '5mb',//100b, 10kb, 10mb, 1gb
 			chunk_size : '10mb',//分块大小，小于这个大小的不分块
+			file_data_name:'file', //name='file' --->  <input type='file' name='file' />  
 			unique_names : true,//生成唯一文件名
 			// 如果可能的话，压缩图片大小
 			/*resize : {

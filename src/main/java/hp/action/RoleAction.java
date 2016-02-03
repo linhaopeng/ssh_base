@@ -1,13 +1,18 @@
 package hp.action;
 
 import hp.action.base.BaseAction;
+import hp.model.SysResource;
 import hp.model.SysRole;
 import hp.model.pageModel.DataGrid;
 import hp.model.pageModel.ReturnJson;
 import hp.util.HqlHelper;
 
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
@@ -54,4 +59,46 @@ public class RoleAction extends BaseAction<SysRole> {
 		}
 		writeJson(json);
 	}
+
+	/**
+	 * 根据角色id获取角色已有权限
+	 */
+	public void getPrivilegeByRoleId() {
+		String hql = "select distinct res from SysRole r join r.resources res where r.id=:id";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", model.getId());
+		List<SysRole> resource = roleService.find(hql, map);
+		writeJson(resource);
+	}
+
+	/**
+	 * 修改角色权限
+	 */
+	public void grantPrivilege() {
+		ReturnJson json = new ReturnJson("修改失败");
+		try {
+			SysRole role = roleService.get(model.getId());
+			// 除去原有权限
+			role.setResources(new HashSet<SysResource>());
+			for (String pid : ids.split(",")) {
+				if (!StringUtils.isBlank(pid)) {
+					// 查询出前台已经勾选的权限
+					int intpid = Integer.parseInt(pid);
+					SysResource resource = sysResourceService.get(intpid);
+					if (resource != null) {
+						role.getResources().add(resource);
+					}
+				}
+			}
+			// 修改角色
+			roleService.saveOrUpdate(role);
+			json.setMsg("修改成功");
+			json.setSuccess(true);
+		} catch (Exception e) {
+			json.setMsg("修改失败");
+			json.setSuccess(true);
+		}
+		writeJson(json);
+	}
+
 }

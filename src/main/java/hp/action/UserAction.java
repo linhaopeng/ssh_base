@@ -126,7 +126,7 @@ public class UserAction extends BaseAction<SysUser> {
 	}
 
 	/**
-	 * 修改用户权限
+	 * 修改用户所属角色
 	 */
 	public void grantRole() {
 		ReturnJson json = new ReturnJson("修改失败");

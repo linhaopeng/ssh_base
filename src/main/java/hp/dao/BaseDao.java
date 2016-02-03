@@ -24,10 +24,12 @@ public interface BaseDao<T> {
 	public void saveOrUpdate(T o);
 
 	public T get(int id);
-	
+
 	public T get(String hql);
 
 	public T get(String hql, Map<String, Object> params);
+
+	public List<T> find();
 
 	public List<T> find(String hql);
 

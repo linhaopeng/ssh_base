@@ -90,6 +90,11 @@ public abstract class BaseDaoImpl<T> implements BaseDao<T> {
 		this.getSession().saveOrUpdate(o);
 	}
 
+	public List<T> find(){
+		String hql = "from " + clazz.getSimpleName(); 
+		Query q = this.getSession().createQuery(hql);
+		return q.list();
+	}
 	
 	public List<T> find(String hql) {
 		Query q = this.getSession().createQuery(hql);

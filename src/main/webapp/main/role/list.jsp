@@ -48,10 +48,10 @@
 			}
 		});
 	};
-	var grantRoleFun = function(id) {
+	var grantPrivilegeFun = function(id) {
 		var dialog = parent.sy.modalDialog({
-			title : '修改角色',
-			url : sy.contextPath + '/securityJsp/base/SyuserRoleGrant.jsp?id=' + id,
+			title : '修改权限',
+			url : '${cxt}/main/role/grantPrivilege.jsp?id=' + id,
 			buttons : [ {
 				text : '修改',
 				handler : function() {
@@ -100,10 +100,11 @@
 			}, {
 				title : '操作',
 				field : 'action',
-				width : '80',
+				width : '150',
 				formatter : function(value, row) {
 					var str = '';
-					str += '<span style="color:blue;" onclick="editFun('+row.id+')">修改</span>'; 
+					str += '<span style="color:blue;" onclick="editFun('+row.id+')">修改</span> '; 
+					str += '<span style="color:blue;" onclick="grantPrivilegeFun('+row.id+')">授权</span> '; 
 					str += '<span style="color:blue;" onclick="removeFun('+row.id+')">删除</span>'; 
 					return str;
 				}

@@ -67,6 +67,13 @@
 			<version>4.11</version>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- 加入javamelody依赖包 -->
+		<dependency>
+			<groupId>net.bull.javamelody</groupId>
+			<artifactId>javamelody-core</artifactId>
+			<version>1.47.0</version>
+		</dependency>
 
 		<!-- 加入druid数据源依赖包 -->
 		<dependency>

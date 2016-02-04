@@ -27,7 +27,6 @@ import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 
-@SuppressWarnings("serial")
 @ParentPackage("basePackage")
 @Namespace("/")
 @Action

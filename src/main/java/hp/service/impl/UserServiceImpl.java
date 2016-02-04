@@ -21,8 +21,8 @@ public class UserServiceImpl extends BaseDaoImpl<SysUser> implements UserService
 
 	public SysUser login(SysUser user) {
 		Map<String, Object> params = new HashMap<String, Object>();
-		String hql = "from SysUser u where u.loginname =:name and u.pwd=:pwd";
-		params.put("name",user.getName());
+		String hql = "from SysUser u left outer join fetch u.roles where u.loginname =:loginName and u.pwd=:pwd";
+		params.put("loginName",user.getLoginname());
 		params.put("pwd",user.getPwd());
 		return get(hql, params);
 	}

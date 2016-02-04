@@ -25,7 +25,6 @@
 		});
 	};
 	var editFun = function(id) {
-		alert(id);
 		var dialog = parent.sy.modalDialog({
 			title : '编辑用户信息',
 			url : '${cxt}/main/role/editUI.jsp?id=' + id,

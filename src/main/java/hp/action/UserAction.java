@@ -3,9 +3,12 @@ package hp.action;
 import hp.action.base.BaseAction;
 import hp.model.SysRole;
 import hp.model.SysUser;
+import hp.model.pageModel.CurrentUser;
 import hp.model.pageModel.DataGrid;
 import hp.model.pageModel.ReturnJson;
+import hp.util.ConfigUtil;
 import hp.util.HqlHelper;
+import hp.util.IpUtil;
 
 import java.io.File;
 import java.util.HashMap;
@@ -16,13 +19,40 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.hibernate.Hibernate;
 import org.springframework.beans.BeanUtils;
+
 
 @Namespace("/user")
 @Action(value = "userAction")
 // 访问路径 /user/userAction!save.action
 public class UserAction extends BaseAction<SysUser> {
 
+	public String test(){
+		getRequest().setAttribute("msg", "adsf");
+		return "noSession";
+	}
+	
+	public void login(){
+		ReturnJson json = new ReturnJson();
+		SysUser user = userService.login(model);
+		if (user != null) {
+			json.setSuccess(true);
+
+			CurrentUser currentUser = new CurrentUser();
+			Hibernate.initialize(user.getRoles());
+			for (SysRole role : user.getRoles()) {
+				Hibernate.initialize(role.getResources());
+			}
+			user.setIp(IpUtil.getIpAddr(getRequest()));
+			currentUser.setSysUser(user);
+			getSession().setAttribute(ConfigUtil.getSessionInfoName(), currentUser);
+		} else {
+			json.setMsg("用户名或密码错误！");
+		}
+		writeJson(json);
+	}
+	
 	/**
 	 * 保存用户
 	 */

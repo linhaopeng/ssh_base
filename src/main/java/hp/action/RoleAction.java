@@ -15,6 +15,7 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.springframework.beans.BeanUtils;
 
 @Namespace("/role")
 @Action(value = "roleAction")
@@ -95,8 +96,19 @@ public class RoleAction extends BaseAction<SysRole> {
 			json.setMsg("修改成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
-			json.setMsg("修改失败");
+		}
+		writeJson(json);
+	}
+
+	public void update() {
+		ReturnJson json = new ReturnJson("删除失败");
+		try {
+			SysRole role = roleService.get(model.getId());
+			BeanUtils.copyProperties(model, role, new String[] { "createdatetime" });
+			roleService.update(role);
+			json.setMsg("修改成功");
 			json.setSuccess(true);
+		} catch (Exception e) {
 		}
 		writeJson(json);
 	}

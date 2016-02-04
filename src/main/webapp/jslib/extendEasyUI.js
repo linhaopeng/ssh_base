@@ -25,6 +25,34 @@ sy.modalDialog = function(options) {
 	return $('<div/>').dialog(opts);
 };
 
+/**
+ * 
+ * 通用错误提示
+ * 
+ * 用于datagrid/treegrid/tree/combogrid/combobox/form加载数据出错时的操作
+ * 
+ * @author 孙宇
+ * 
+ * @requires jQuery,EasyUI
+ */
+sy.onLoadError = {
+	onLoadError : function(XMLHttpRequest) {
+		if (parent.$ && parent.$.messager) {
+			parent.$.messager.progress('close');
+			parent.$.messager.alert('错误', XMLHttpRequest.responseText);
+		} else {
+			$.messager.progress('close');
+			$.messager.alert('错误', XMLHttpRequest.responseText);
+		}
+	}
+};
+$.extend($.fn.datagrid.defaults, sy.onLoadError);
+$.extend($.fn.treegrid.defaults, sy.onLoadError);
+$.extend($.fn.tree.defaults, sy.onLoadError);
+$.extend($.fn.combogrid.defaults, sy.onLoadError);
+$.extend($.fn.combobox.defaults, sy.onLoadError);
+$.extend($.fn.form.defaults, sy.onLoadError);
+
 
 /**
  * 扩展tree和combotree，使其支持平滑数据格式

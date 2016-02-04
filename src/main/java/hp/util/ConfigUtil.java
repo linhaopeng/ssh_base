@@ -12,13 +12,13 @@ public class ConfigUtil {
 	private static final ResourceBundle bundle = java.util.ResourceBundle.getBundle("config");
 
 	/**
-	 * 获得sessionInfo名字
+	 * 获得currentUser名字
 	 * 
 	 * @return
 	 */
-//	public static final String getSessionInfoName() {
-//		return bundle.getString("sessionInfoName");
-//	}
+	public static final String getSessionInfoName() {
+		return bundle.getString("currentUser");
+	}
 
 	/**
 	 * 通过键获取值

@@ -21,17 +21,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <script type="text/javascript">
   $(function(){
-	  $('#dd').dialog({
-		    title: 'My Dialog',
-		    width: 400,
-		    height: 200,
-		    closed: false,
-		    cache: false,
-		    href: 'get_content.php',
-		    modal: true
+	  $('#dd').tree({
+		    url: '${cxt}/resource/sysResourceAction!getTree.action'
 		});
   })
   </script>
-   <div id="dd">Dialog Content.</div>
+   <ul id="dd"></ul> 
   </body>
 </html>

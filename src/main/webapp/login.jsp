@@ -51,7 +51,7 @@
 			}
 		});
 
-		$('#userLoginCombobox').combobox({
+		/* $('#userLoginCombobox').combobox({
 			url : '${cxt}/base/syuser!doNotNeedSessionAndSecurity_loginNameComboBox.sy',
 			valueField : 'loginname',
 			textField : 'loginname',
@@ -99,7 +99,7 @@
 				sortable : true
 			} ] ]
 		});
-
+ */
 	});
 </script>
 </head>

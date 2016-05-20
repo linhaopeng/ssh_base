@@ -32,6 +32,10 @@ public class RoleAction extends BaseAction<SysRole> {
 		grid.setTotal(count);
 		writeJson(grid);
 	}
+	
+	public String test(){
+		return "test";
+	}
 
 	public void save() {
 		ReturnJson json = new ReturnJson("添加失败");

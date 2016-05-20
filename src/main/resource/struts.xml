@@ -27,6 +27,13 @@
 	<!-- 对于WebLogic,Orion,OC4J此属性应该设置成true -->
 	<constant name="struts.dispatcher.parametersWorkaround" value="false" />
 
+<!-- 这两个配置是在使用struts2-convention-plugin的时候的返回路径
+	/page表示返回在page目录下.
+	http://localhost:9999/ssh/role/roleAction!test.action  对应关系->  /page/role/test.jsp
+ -->
+	<constant name="struts.convention.result.path" value="/content" /> 
+	<constant name="struts.convention.package.locators" value="web,action" />  
+
 	<package name="basePackage" extends="struts-default" namespace="/">
 		<interceptors>
 			<!-- javamelody拦截器 -->

@@ -3,6 +3,11 @@
 <html>
 <head>
 <title>SSHE</title>
+<style type="text/css">
+	.logo{
+		background: url("../images/logo.png") no-repeat left bottom;
+	}
+</style>
 <jsp:include page="../common/common.jsp"></jsp:include>
 <script type="text/javascript">
 	var mainMenu;
@@ -125,13 +130,13 @@
 </script>
 </head>
 <body id="mainLayout" class="easyui-layout">
-	<div data-options="region:'north',href:'${pageContext.request.contextPath }/main/north.jsp'" style="height: 70px; overflow: hidden;" class="logo"></div>
-	<div data-options="region:'west',href:'',split:true" title="导航" style="width: 200px; padding: 10px;">
+	<div data-options="region:'north',href:'${pageContext.request.contextPath }/main/north.jsp'" style="height: 65px; overflow: hidden;" class="logo"></div>
+	<div data-options="region:'west',href:'',split:true" title="系统菜单" style="width: 200px; padding: 10px;">
 		<ul id="mainMenu"></ul>
 	</div>
 	<div data-options="region:'center'" style="overflow: hidden;">
 		<div id="mainTabs">
-			<div title="关于SSHE" data-options="iconCls:'icon-add'">
+			<div title="关于SSHE" data-options="iconCls:'icon-help'">
 				<iframe src="${pageContext.request.contextPath }/welcome.jsp" allowTransparency="true" style="border: 0; width: 100%; height: 99%;" frameBorder="0"></iframe>
 			</div>
 		</div>

@@ -1,6 +1,5 @@
 package hp.service.impl;
 
-import hp.dao.impl.BaseDaoImpl;
 import hp.model.SysUser;
 import hp.model.pageModel.DataGrid;
 import hp.service.UserService;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 // 使用注解注入
 @Service("userService")
-public class UserServiceImpl extends BaseDaoImpl<SysUser> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<SysUser> implements UserService {
 	public void test() {
 		System.out.println("测试spring");
 	}
@@ -22,8 +21,8 @@ public class UserServiceImpl extends BaseDaoImpl<SysUser> implements UserService
 	public SysUser login(SysUser user) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String hql = "from SysUser u left outer join fetch u.roles where u.loginname =:loginName and u.pwd=:pwd";
-		params.put("loginName",user.getLoginname());
-		params.put("pwd",user.getPwd());
+		params.put("loginName", user.getLoginname());
+		params.put("pwd", user.getPwd());
 		return get(hql, params);
 	}
 
@@ -41,6 +40,5 @@ public class UserServiceImpl extends BaseDaoImpl<SysUser> implements UserService
 		grid.setTotal(count);
 		return grid;
 	}
-
 
 }

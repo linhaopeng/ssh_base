@@ -8,6 +8,7 @@ http://www.springframework.org/schema/context/spring-context-3.0.xsd
 	<context:property-placeholder location="classpath:config.properties" />
 
 	<!-- 自动扫描dao和service包(自动注入) -->
-	<context:component-scan base-package="hp.dao,hp.service" />
-
+	<context:component-scan base-package="hp.dao,hp.service,hp.action" >
+        <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
 </beans>

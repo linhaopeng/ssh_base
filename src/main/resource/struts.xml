@@ -56,12 +56,12 @@
 				<interceptor-ref name="sessionStack"></interceptor-ref>
 				<interceptor-ref name="securityInterceptor">
 					<!-- 配置方法不拦截 -->
-					<param name="excludeMethods">login,getTree,getResourcetypeList,getPrivilegeByRoleId,getRoleByUserId,getAllRole</param>
+					<param name="excludeMethods">login,getTree,getResourcetypeList,getPrivilegeByRoleId,getRoleByUserId,get.action</param>
 				</interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<!-- 全局拦截器栈 -->
-		<default-interceptor-ref name="sessionStack"></default-interceptor-ref>
+		<default-interceptor-ref name="securityStack"></default-interceptor-ref>
 
 		<global-results>
 			<!-- 没有session -->

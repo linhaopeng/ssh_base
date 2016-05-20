@@ -9,6 +9,11 @@ package hp.model.pageModel;
  */
 public class ReturnJson implements java.io.Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 383378212673823217L;
+
 	private boolean success = false;
 
 	private String msg = "";

@@ -11,7 +11,7 @@
 	$(function() {
 
 		mainMenu = $('#mainMenu').tree({
-			url : '${pageContext.request.contextPath}/resource/sysResourceAction!getTree.action',
+			url : '${pageContext.request.contextPath}/resource/sysResourceAction!getTreeByUser.action',
 			parentField : 'pid',
 			onClick : function(node) {
 				if (node.attributes.url) {

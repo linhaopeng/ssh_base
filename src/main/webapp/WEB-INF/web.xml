@@ -107,7 +107,7 @@
 		<filter-class>hp.filter.SessionFilter</filter-class>
 		<init-param>
 			<param-name>include</param-name>
-			<!-- 在securityJsp这个文件夹下面的所有JSP页面，都需要有session才能访问，可以配置多个，用英文半角逗号分割 -->
+			<!-- 在main这个文件夹下面的所有JSP页面，都需要有session才能访问，可以配置多个，用英文半角逗号分割 -->
 			<param-value>main</param-value>
 		</init-param>
 	</filter>
@@ -127,6 +127,6 @@
 	</servlet-mapping>
 
 	<welcome-file-list>
-		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>login.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>

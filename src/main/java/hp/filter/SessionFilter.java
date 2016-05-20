@@ -25,8 +25,9 @@ public class SessionFilter implements Filter {
 
 	private List<String> list = new ArrayList<String>();
 
+	// 配置哪些文件夹里面的东西需要登录
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// 初始化需要拦截的文件夹
+		// 初始化需要拦截的文件夹 web.xml中配置
 		String include = filterConfig.getInitParameter("include");
 		if (!StringUtils.isBlank(include)) {
 			// 用逗号切割
@@ -45,9 +46,11 @@ public class SessionFilter implements Filter {
 
 		for (String url : list) {
 			if (servletPath.indexOf(url) > -1) {// 需要过滤
-				logger.info("进入session过滤器->访问路径为[" + servletPath + "]");
+				// logger.info("进入session过滤器->访问路径为[" + servletPath + "]");
 				if (request.getSession().getAttribute(ConfigUtil.getSessionInfoName()) == null) {// session不存在需要拦截
-					request.setAttribute("msg", "您还没有登录或登录已超时，请重新登录.");
+					String msg = "您还没有登录或登录已超时，请重新登录.";
+					request.setAttribute("msg", msg);
+					logger.info(msg);
 					request.getRequestDispatcher("/error/noSession.jsp").forward(request, response);
 					return;
 				}

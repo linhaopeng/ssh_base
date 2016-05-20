@@ -1,8 +1,10 @@
 package hp.model.pageModel;
 
 import java.util.List;
+
 /**
  * easyui tree的数据格式
+ * 
  * @author baojulin
  *
  */
@@ -15,8 +17,6 @@ public class Tree {
 	private List<Tree> children;
 	private String iconCls;
 	private int pid;
-
-
 
 	public String getText() {
 		return text;
@@ -81,7 +81,5 @@ public class Tree {
 	public void setPid(int pid) {
 		this.pid = pid;
 	}
-
-
 
 }

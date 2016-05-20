@@ -52,11 +52,12 @@ public class RoleAction extends BaseAction<SysRole> {
 	public void delete() {
 		ReturnJson json = new ReturnJson("删除失败");
 		try {
-			SysRole sysRole = roleService.get(model.getId());
-			roleService.delete(sysRole);
+			//SysRole sysRole = roleService.get(model.getId());
+			roleService.delete2(model);
 			json.setMsg("删除成功");
 			json.setSuccess(true);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		writeJson(json);
 	}

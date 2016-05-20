@@ -2,14 +2,18 @@ package hp.action;
 
 import hp.action.base.BaseAction;
 import hp.model.SysResource;
+import hp.model.SysUser;
+import hp.model.pageModel.CurrentUser;
 import hp.model.pageModel.ReturnJson;
 import hp.model.pageModel.Tree;
+import hp.util.ConfigUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.springframework.beans.BeanUtils;
@@ -18,6 +22,30 @@ import org.springframework.beans.BeanUtils;
 @Action(value = "sysResourceAction")
 public class SysResourceAction extends BaseAction<SysResource> {
 
+	public void getTreeByUser(){
+		CurrentUser currentUser = (CurrentUser) ServletActionContext.getRequest().getSession().getAttribute(ConfigUtil.getSessionInfoName());
+		SysUser sysUser = currentUser.getSysUser();
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", 1);
+		params.put("userId", sysUser.getId());
+		List<SysResource> resources = sysResourceService.find("select distinct s from SysResource s join s.roles role join role.users user where s.resourcetype.id=:id and user.id = :userId", params);
+		//"select distinct t from Syresource t join t.syroles role join role.syusers user"
+		List<Tree> tree = new ArrayList<Tree>();
+		for (SysResource resource : resources) {
+			Tree node = new Tree();
+			// 复制属性值 这里只是复制了id跟pid
+			BeanUtils.copyProperties(resource, node);
+
+			node.setText(resource.getName());
+			Map<String, String> attributes = new HashMap<String, String>();
+			attributes.put("url", resource.getUrl());
+			attributes.put("target", resource.getTarget());
+			node.setAttributes(attributes);
+			tree.add(node);
+		}
+		writeJson(tree);
+	}
+	
 	public void getTree() {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", 1);
